@@ -19,6 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link rel="icon" href="/isotipo.png" type="image/png" />
+      </head>
       <body className="bg-white font-sans text-brand-dark antialiased">
         <TopBanner />
         <Header />
