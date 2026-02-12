@@ -3,14 +3,21 @@ import Image from "next/image";
 import { FaBox, FaCubes, FaBarsStaggered, FaWhatsapp } from "react-icons/fa6";
 
 const cementoMarcas = [
-  "cemento-sol.png",
-  "apu.png",
-  "andino.png",
-  "fortaleza.png",
-  "forte.png",
+  "sol.jpeg"
 ];
-const ladrilloMarcas = ["lark.svg"];
-const fierroMarcas = ["aceros-arequipa.png", "siderperu.webp"];
+
+const ladrilloMarcas = [
+  "lark.jpeg", 
+  "fortes.jpeg"
+];
+
+const fierroMarcas = [
+  "siderperu.jpeg"
+];
+
+const alambresMarcas = [
+  "treamperu.jpeg"
+];
 
 export const metadata = {
   title: "Marcas - Grupo Olivares",
@@ -45,6 +52,7 @@ export default function MarcasPage() {
         </div>
       </section>
 
+      {/* SECCIÓN CEMENTO */}
       <section className="py-12 bg-brand-light">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 mb-8">
@@ -57,14 +65,16 @@ export default function MarcasPage() {
             {cementoMarcas.map((src) => (
               <div
                 key={src}
-                className="bg-white p-8 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
+                // Reducimos p-8 a p-4 para dar más espacio a la imagen
+                className="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
               >
                 <Image
-                  src={`/marcas-olivares/${src}`}
+                  src={`/imagenes-olivares/${src}`}
                   alt={src.replace(/\.[^.]+$/, "")}
-                  width={120}
-                  height={80}
-                  className="max-h-20 w-auto object-contain opacity-70 group-hover:opacity-100 transition"
+                  width={200} // Aumentamos el ancho base
+                  height={120} // Aumentamos el alto base
+                  // Cambiamos max-h-20 a max-h-32 para que use casi todo el contenedor
+                  className="max-h-32 w-full object-contain opacity-70 group-hover:opacity-100 transition"
                 />
               </div>
             ))}
@@ -72,28 +82,27 @@ export default function MarcasPage() {
         </div>
       </section>
 
+      {/* SECCIÓN LADRILLOS */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 mb-8">
             <div className="bg-brand-accent-orange text-white p-3 rounded-lg">
               <FaCubes className="text-xl" />
             </div>
-            <h2 className="text-2xl font-extrabold text-brand-dark">
-              Ladrillos
-            </h2>
+            <h2 className="text-2xl font-extrabold text-brand-dark">Ladrillos</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {ladrilloMarcas.map((src) => (
               <div
                 key={src}
-                className="bg-white p-8 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
+                className="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
               >
                 <Image
-                  src={`/marcas-olivares/${src}`}
+                  src={`/imagenes-olivares/${src}`}
                   alt={src.replace(/\.[^.]+$/, "")}
-                  width={120}
-                  height={80}
-                  className="max-h-20 w-auto object-contain opacity-70 group-hover:opacity-100 transition"
+                  width={200}
+                  height={120}
+                  className="max-h-32 w-full object-contain opacity-70 group-hover:opacity-100 transition"
                 />
               </div>
             ))}
@@ -101,28 +110,55 @@ export default function MarcasPage() {
         </div>
       </section>
 
+      {/* SECCIÓN FIERRO Y ACERO */}
       <section className="py-12 bg-brand-light">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 mb-8">
             <div className="bg-brand-accent-yellow text-brand-dark p-3 rounded-lg">
               <FaBarsStaggered className="text-xl" />
             </div>
-            <h2 className="text-2xl font-extrabold text-brand-dark">
-              Fierro y Acero
-            </h2>
+            <h2 className="text-2xl font-extrabold text-brand-dark">Fierro y Acero</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {fierroMarcas.map((src) => (
               <div
                 key={src}
-                className="bg-white p-8 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
+                className="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
               >
                 <Image
-                  src={`/marcas-olivares/${src}`}
+                  src={`/imagenes-olivares/${src}`}
                   alt={src.replace(/\.[^.]+$/, "")}
-                  width={120}
-                  height={80}
-                  className="max-h-20 w-auto object-contain opacity-70 group-hover:opacity-100 transition"
+                  width={200}
+                  height={120}
+                  className="max-h-32 w-full object-contain opacity-70 group-hover:opacity-100 transition"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN ALAMBRE Y CLAVOS */}
+      <section className="py-12 bg-brand-light">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="bg-brand-accent-yellow text-brand-dark p-3 rounded-lg">
+              <FaBarsStaggered className="text-xl" />
+            </div>
+            <h2 className="text-2xl font-extrabold text-brand-dark">Alambre y Clavos</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {alambresMarcas.map((src) => (
+              <div
+                key={src}
+                className="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
+              >
+                <Image
+                  src={`/imagenes-olivares/${src}`}
+                  alt={src.replace(/\.[^.]+$/, "")}
+                  width={200}
+                  height={120}
+                  className="max-h-32 w-full object-contain opacity-70 group-hover:opacity-100 transition"
                 />
               </div>
             ))}

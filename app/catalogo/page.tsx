@@ -67,14 +67,14 @@ export default function CatalogoPage() {
               </a>
               <p className="text-xs text-brand-grey flex items-center justify-center md:justify-start gap-2">
                 <FaLock className="text-brand-primary" />
-                Descarga segura • Formato PDF • 15 MB
+                Descarga segura • Formato PDF
               </p>
             </div>
 
             <div className="mt-10 border-t border-gray-100 pt-8 grid grid-cols-3 gap-4 text-center">
               <div>
                 <span className="block text-2xl font-black text-brand-dark">
-                  500+
+                  30+
                 </span>
                 <span className="text-xs text-brand-grey font-bold uppercase">
                   Productos
@@ -82,7 +82,7 @@ export default function CatalogoPage() {
               </div>
               <div>
                 <span className="block text-2xl font-black text-brand-dark">
-                  20+
+                  5+
                 </span>
                 <span className="text-xs text-brand-grey font-bold uppercase">
                   Marcas

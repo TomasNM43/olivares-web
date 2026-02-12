@@ -19,34 +19,44 @@ const categories = [
 
 const featuredProducts = [
   {
-    image: "/productos/taladro.webp",
-    category: "Herramientas de Poder",
-    title: "Taladro Percutor Bosch 18V",
-    subtitle: "Potencia industrial inalámbrica para tu obra.",
+    image: "/imagenes-olivares/producto-2.jpeg",
+    category: "Estructuras",
+    title: "Fierro de Acero – SIDER",
+    subtitle: "Máxima resistencia para concreto armado.",
     description:
-      "Ideal para perforaciones exigentes en concreto y mampostería. Su tecnología inalámbrica te da libertad total de movimiento sin sacrificar rendimiento. Incluye maletín y doble batería. Respaldo y garantía Bosch.",
-    cta: "Consultar Precio Ahora",
+      "Barra de acero corrugado diseñada para estructuras exigentes. Garantiza seguridad, durabilidad y cumplimiento de estándares internacionales de calidad en todo tipo de edificaciones.",
+    cta: "Cotizar Fierro SIDER",
     reverse: false,
   },
   {
-    image: "/productos/cemento.webp",
-    category: "Materiales de Construcción",
-    title: "Cemento Sol Tipo I",
-    subtitle: "La base sólida que tu proyecto necesita.",
+    image: "/imagenes-olivares/producto-3.jpeg",
+    category: "Materiales Base",
+    title: "Cemento Sol",
+    subtitle: "El aliado histórico de la construcción.",
     description:
-      "Cemento Portland de alta calidad, la elección preferida por los maestros de obra para estructuras, tarrajeos y concreto armado. Garantiza máxima resistencia y durabilidad a largo plazo en tus edificaciones.",
-    cta: "Consultar por Cantidad",
+      "Cemento Portland de excelente calidad, ideal para tarrajeo, asentado de ladrillo y estructuras de concreto. Ofrece la mejor resistencia y trabajabilidad del mercado peruano.",
+    cta: "Consultar Stock",
     reverse: true,
   },
   {
-    image: "/productos/pintura.webp",
-    category: "Acabados y Pinturas",
-    title: "Látex Vencedor Supermate",
-    subtitle: "Acabado perfecto, lavable y duradero.",
+    image: "/imagenes-olivares/producto-1.jpeg",
+    category: "Albañilería",
+    title: "Ladrillo de Obra",
+    subtitle: "Resistencia y aislamiento térmico superior.",
     description:
-      "Renueva tus espacios con esta pintura de alto poder cubriente y bajo olor. Su fórmula lavable superior la hace ideal para interiores de alto tráfico como salas y pasillos.",
-    cta: "Ver Carta de Colores",
+      "Material esencial para la construcción de muros. Ofrece alta durabilidad y un excelente comportamiento térmico, adaptándose a las necesidades estructurales de tu obra.",
+    cta: "Cotizar por Millar",
     reverse: false,
+  },
+  {
+    image: "/imagenes-olivares/producto-4.jpeg",
+    category: "Fijación y Ferretería",
+    title: "Clavos de Acero",
+    subtitle: "Fijación precisa y de alta resistencia.",
+    description:
+      "Fabricados en acero de alta resistencia, ideales para carpintería y armado en general. Disponibles en diversas medidas para asegurar cada detalle de tu proyecto.",
+    cta: "Ver Medidas Disponibles",
+    reverse: true,
   },
 ];
 
@@ -67,7 +77,7 @@ export default function HomePage() {
             {categories.map(({ icon: Icon, label, href }) => (
               <Link key={label} href={href} className="group text-center">
                 <div className="bg-brand-light w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-primary transition duration-300 shadow-sm group-hover:shadow-md group-hover:-translate-y-2 border-2 border-transparent group-hover:border-brand-primary-dark/20">
-                  <Icon className="text-3xl text-brand-primary group-hover:text-white transition" />
+                  <Icon className="text-5xl text-brand-primary group-hover:text-white transition" />
                 </div>
                 <h4 className="font-bold text-brand-dark group-hover:text-brand-primary transition">
                   {label}
@@ -102,17 +112,29 @@ export default function HomePage() {
             {featuredProducts.map((product) => (
               <div
                 key={product.title}
-                className={`bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 group border border-gray-100 overflow-hidden flex flex-col md:flex-row ${product.reverse ? "md:flex-row-reverse" : ""}`}
+                className={`bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 group border border-gray-100 overflow-hidden flex flex-col md:flex-row ${
+                  product.reverse ? "md:flex-row-reverse" : ""
+                }`}
               >
-                <div className={`w-full md:w-2/5 h-72 md:h-auto bg-white relative overflow-hidden p-8 flex items-center justify-center border-b md:border-b-0 border-gray-100 ${product.reverse ? "md:border-l" : "md:border-r"}`}>
+                {/* CAMBIO AQUÍ: 
+                   1. 'relative': Necesario para usar fill en Next/Image.
+                   2. 'h-64 md:h-auto md:min-h-[350px]': Asegura altura en móvil y escritorio.
+                   3. 'w-full md:w-2/5': Mantiene la proporción del ancho.
+                */}
+                <div
+                  className={`relative w-full md:w-2/5 h-64 md:h-auto md:min-h-[350px] bg-white p-6 md:p-8 flex items-center justify-center border-b md:border-b-0 border-gray-100 ${
+                    product.reverse ? "md:border-l" : "md:border-r"
+                  }`}
+                >
                   <Image
                     src={product.image}
                     alt={product.title}
-                    width={400}
-                    height={280}
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-500 relative z-10"
+                    fill // Ocupa todo el contenedor padre
+                    sizes="(max-width: 768px) 100vw, 40vw" // Optimización de carga
+                    className="object-contain p-2 group-hover:scale-105 transition duration-500" // object-contain asegura que entre sin cortarse
                   />
                 </div>
+                
                 <div className="p-8 md:p-12 md:w-3/5 flex flex-col justify-center">
                   <span className="text-sm font-bold text-brand-grey uppercase mb-3 block tracking-wider">
                     {product.category}

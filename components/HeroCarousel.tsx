@@ -3,55 +3,21 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  FaChevronLeft,
-  FaChevronRight,
-  FaBookOpen,
-  FaArrowRight,
-  FaCertificate,
-  FaLocationDot,
-  FaRocket,
-} from "react-icons/fa6";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
+// Simplificamos la data para solo tener imagen y un enlace de destino
 const slides = [
   {
     image:
-      "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=1600",
-    badge: "Calidad Garantizada desde 1980",
-    badgeClass: "bg-brand-primary/20 text-brand-accent-yellow border-brand-accent-yellow/40",
-    title: "Tu proyecto empieza con las",
-    highlight: "mejores herramientas.",
-    paragraph:
-      "Soluciones integrales para construcción, industria y hogar. Asesoría técnica personalizada y stock permanente.",
-    borderClass: "border-brand-accent-yellow",
-    ctaPrimary: { href: "/catalogo", label: "Ver Catálogo 2026", icon: FaBookOpen },
-    ctaSecondary: { href: "/marcas", label: "Nuestras Marcas", icon: FaArrowRight },
+      "/imagenes-olivares/banner-1.jpeg",
+    href: "/catalogo",
+    alt: "Herramientas de construcción",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1600",
-    badge: "Distribuidores Autorizados",
-    badgeClass: "bg-brand-accent-orange/20 text-brand-accent-orange border-brand-accent-orange/40",
-    title: "Cemento, Fierro y",
-    highlight: "Materiales de Primera",
-    paragraph:
-      "Distribuidores oficiales de UNACEM, Aceros Arequipa y Sider Perú. Stock permanente en nuestras 3 sedes.",
-    borderClass: "border-brand-accent-orange",
-    ctaPrimary: { href: "/marcas", label: "Ver Marcas Oficiales", icon: FaCertificate },
-    ctaSecondary: { href: "/contacto", label: "Cotizar Ahora", icon: FaArrowRight },
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=80&w=1600",
-    badge: "46 Años de Experiencia",
-    badgeClass: "bg-brand-primary/20 text-brand-primary border-brand-primary/40",
-    title: "3 Sedes en Lima para",
-    highlight: "atenderte mejor",
-    paragraph:
-      "San Juan de Lurigancho y Jicamarca. Encuentra la sede más cercana y visítanos para asesoría personalizada.",
-    borderClass: "border-brand-primary",
-    ctaPrimary: { href: "/contacto", label: "Ver Ubicaciones", icon: FaLocationDot },
-    ctaSecondary: { href: "/nosotros", label: "Nuestra Historia", icon: FaArrowRight },
+      "/imagenes-olivares/banner-2.jpeg",
+    href: "/marcas",
+    alt: "Materiales de industria",
   },
 ];
 
@@ -74,98 +40,73 @@ export default function HeroCarousel() {
     show(current - 1);
   }, [current, show]);
 
+  // Autoplay
   useEffect(() => {
     const id = setInterval(next, 5000);
     return () => clearInterval(id);
   }, [current, next]);
 
   return (
-    <section className="relative bg-brand-dark overflow-hidden">
-      <div className="carousel-container relative h-[500px] md:h-[600px]">
+    <section className="relative w-full overflow-hidden bg-gray-100">
+      {/* Altura del banner - Ajustable según necesidad */}
+      <div className="carousel-container relative h-[300px] md:h-[500px] lg:h-[600px]">
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`carousel-slide absolute inset-0 transition-opacity duration-700 ${
-              index === current ? "active opacity-100" : "opacity-0"
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+              index === current ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            <div className="absolute inset-0 z-0">
+            {/* Hacemos que toda la imagen sea un enlace cliqueable */}
+            <Link href={slide.href} className="block w-full h-full relative">
               <Image
                 src={slide.image}
-                alt=""
+                alt={slide.alt}
                 fill
-                className="object-cover opacity-20 grayscale mix-blend-luminosity"
+                priority={index === 0} // Prioridad de carga para la primera imagen
+                className="object-cover" // Asegura que la imagen cubra todo el espacio sin deformarse
                 sizes="100vw"
                 unoptimized
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/90 to-transparent" />
-            </div>
-            <div className="container mx-auto px-4 relative z-10 h-full flex items-center">
-              <div className="max-w-2xl">
-                <span
-                  className={`inline-block py-1 px-3 rounded-full text-sm font-bold mb-4 uppercase tracking-wider border ${slide.badgeClass}`}
-                >
-                  {slide.badge}
-                </span>
-                <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-                  {slide.title}{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent-yellow via-brand-primary to-brand-accent-orange">
-                    {slide.highlight}
-                  </span>
-                </h2>
-                <p
-                  className={`text-xl text-white/90 mb-10 leading-relaxed border-l-4 pl-4 ${slide.borderClass}`}
-                >
-                  {slide.paragraph}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link
-                    href={slide.ctaPrimary.href}
-                    className="bg-brand-primary hover:bg-brand-primary-dark text-white px-8 py-4 rounded-lg font-bold text-center transition flex items-center justify-center gap-2 shadow-lg shadow-brand-primary/30"
-                  >
-                    <slide.ctaPrimary.icon />
-                    {slide.ctaPrimary.label}
-                  </Link>
-                  <Link
-                    href={slide.ctaSecondary.href}
-                    className="group border-2 border-brand-accent-yellow hover:border-brand-accent-orange text-brand-accent-yellow hover:text-brand-accent-orange px-8 py-4 rounded-lg font-bold text-center transition flex items-center justify-center gap-2"
-                  >
-                    <span>{slide.ctaSecondary.label}</span>{" "}
-                    <FaArrowRight className="group-hover:translate-x-1 transition" />
-                  </Link>
-                </div>
-              </div>
-            </div>
+            </Link>
           </div>
         ))}
 
+        {/* --- Controles de Navegación --- */}
+        
+        {/* Flecha Izquierda */}
         <button
           type="button"
           onClick={prev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center transition group"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition backdrop-blur-sm"
           aria-label="Anterior"
         >
-          <FaChevronLeft className="group-hover:-translate-x-1 transition" />
+          <FaChevronLeft className="text-lg md:text-xl" />
         </button>
+
+        {/* Flecha Derecha */}
         <button
           type="button"
           onClick={next}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white w-12 h-12 rounded-full flex items-center justify-center transition group"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition backdrop-blur-sm"
           aria-label="Siguiente"
         >
-          <FaChevronRight className="group-hover:translate-x-1 transition" />
+          <FaChevronRight className="text-lg md:text-xl" />
         </button>
 
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+        {/* Indicadores (Puntos) */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
           {slides.map((_, i) => (
             <button
               key={i}
               type="button"
               onClick={() => show(i)}
-              className={`carousel-indicator w-3 h-3 rounded-full transition-all duration-300 ${
-                i === current ? "active bg-white" : "bg-white/40 hover:bg-white/60"
+              className={`w-3 h-3 rounded-full transition-all duration-300 shadow-sm ${
+                i === current 
+                  ? "bg-white scale-110" 
+                  : "bg-white/50 hover:bg-white/80"
               }`}
-              aria-label={`Ir a slide ${i + 1}`}
+              aria-label={`Ir a banner ${i + 1}`}
             />
           ))}
         </div>
