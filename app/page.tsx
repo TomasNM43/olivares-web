@@ -7,6 +7,7 @@ import {
   FaScrewdriverWrench,
   FaArrowRight,
   FaWhatsapp,
+  FaBath
 } from "react-icons/fa6";
 import HeroCarousel from "@/components/HeroCarousel";
 
@@ -15,6 +16,7 @@ const categories = [
   { icon: FaCubes, label: "Ladrillo", href: "#" },
   { icon: FaBarsStaggered, label: "Fierro", href: "#" },
   { icon: FaScrewdriverWrench, label: "Alambre y Clavos", href: "#" },
+  { icon: FaBath, label: "Sanitarios y Plomería", href: "#" },
 ];
 
 const featuredProducts = [
@@ -73,13 +75,18 @@ export default function HomePage() {
             </h3>
             <div className="w-24 h-1.5 bg-brand-primary mx-auto mt-4 rounded-full" />
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          
+          {/* CAMBIO CLAVE: 
+              'md:grid-cols-5' asegura que las 5 categorías estén en una sola línea.
+              'grid-cols-2' mantiene 2 columnas en móviles.
+          */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             {categories.map(({ icon: Icon, label, href }) => (
               <Link key={label} href={href} className="group text-center">
                 <div className="bg-brand-light w-24 h-24 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-primary transition duration-300 shadow-sm group-hover:shadow-md group-hover:-translate-y-2 border-2 border-transparent group-hover:border-brand-primary-dark/20">
-                  <Icon className="text-5xl text-brand-primary group-hover:text-white transition" />
+                  <Icon className="text-4xl md:text-5xl text-brand-primary group-hover:text-white transition" />
                 </div>
-                <h4 className="font-bold text-brand-dark group-hover:text-brand-primary transition">
+                <h4 className="font-bold text-brand-dark group-hover:text-brand-primary transition text-sm md:text-base">
                   {label}
                 </h4>
               </Link>
@@ -116,11 +123,7 @@ export default function HomePage() {
                   product.reverse ? "md:flex-row-reverse" : ""
                 }`}
               >
-                {/* CAMBIO AQUÍ: 
-                   1. 'relative': Necesario para usar fill en Next/Image.
-                   2. 'h-64 md:h-auto md:min-h-[350px]': Asegura altura en móvil y escritorio.
-                   3. 'w-full md:w-2/5': Mantiene la proporción del ancho.
-                */}
+                {/* Ajuste de imagen para mantener proporciones correctas */}
                 <div
                   className={`relative w-full md:w-2/5 h-64 md:h-auto md:min-h-[350px] bg-white p-6 md:p-8 flex items-center justify-center border-b md:border-b-0 border-gray-100 ${
                     product.reverse ? "md:border-l" : "md:border-r"
@@ -129,12 +132,12 @@ export default function HomePage() {
                   <Image
                     src={product.image}
                     alt={product.title}
-                    fill // Ocupa todo el contenedor padre
-                    sizes="(max-width: 768px) 100vw, 40vw" // Optimización de carga
-                    className="object-contain p-2 group-hover:scale-105 transition duration-500" // object-contain asegura que entre sin cortarse
+                    fill
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    className="object-contain p-2 group-hover:scale-105 transition duration-500"
                   />
                 </div>
-                
+
                 <div className="p-8 md:p-12 md:w-3/5 flex flex-col justify-center">
                   <span className="text-sm font-bold text-brand-grey uppercase mb-3 block tracking-wider">
                     {product.category}

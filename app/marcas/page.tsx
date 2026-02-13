@@ -1,6 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaBox, FaCubes, FaBarsStaggered, FaWhatsapp } from "react-icons/fa6";
+import {
+  FaBoxOpen,
+  FaCubes,
+  FaBarsStaggered,
+  FaScrewdriverWrench,
+  FaArrowRight,
+  FaWhatsapp,
+  FaBath
+} from "react-icons/fa6";
 
 const cementoMarcas = [
   "sol.jpeg",
@@ -17,11 +25,14 @@ const ladrilloMarcas = [
 const fierroMarcas = [
   "siderperu.jpeg",
   "aceros-arequipa.jpeg",
-  "rotoplast.jpeg"
 ];
 
 const alambresMarcas = [
   "treamperu.jpeg"
+];
+
+const sanitariosPlomeriaMarcas = [
+  "rotoplast.jpeg",
 ];
 
 export const metadata = {
@@ -62,7 +73,7 @@ export default function MarcasPage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 mb-8">
             <div className="bg-brand-primary text-white p-3 rounded-lg">
-              <FaBox className="text-xl" />
+              <FaBoxOpen className="text-xl" />
             </div>
             <h2 className="text-2xl font-extrabold text-brand-dark">Cemento</h2>
           </div>
@@ -144,16 +155,44 @@ export default function MarcasPage() {
       </section>
 
       {/* SECCIÓN ALAMBRE Y CLAVOS */}
-      <section className="py-12 bg-brand-light">
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 mb-8">
             <div className="bg-brand-accent-yellow text-brand-dark p-3 rounded-lg">
-              <FaBarsStaggered className="text-xl" />
+              <FaScrewdriverWrench className="text-xl" />
             </div>
             <h2 className="text-2xl font-extrabold text-brand-dark">Alambre y Clavos</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {alambresMarcas.map((src) => (
+              <div
+                key={src}
+                className="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
+              >
+                <Image
+                  src={`/imagenes-olivares/${src}`}
+                  alt={src.replace(/\.[^.]+$/, "")}
+                  width={200}
+                  height={120}
+                  className="max-h-32 w-full object-contain opacity-70 group-hover:opacity-100 transition"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN SANITARIOS Y PLOMERÍA */}
+      <section className="py-12 bg-brand-light">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="bg-brand-accent-yellow text-brand-dark p-3 rounded-lg">
+              <FaBath className="text-xl" />
+            </div>
+            <h2 className="text-2xl font-extrabold text-brand-dark">Sanitarios y Plomeria</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {sanitariosPlomeriaMarcas.map((src) => (
               <div
                 key={src}
                 className="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-center h-40 grayscale hover:grayscale-0 hover:shadow-xl hover:border-brand-primary transition duration-300 group"
